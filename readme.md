@@ -101,4 +101,4 @@ Estas son las principales propiedades del objeto global y se conocen como global
 
 `__filename` es similar a __dirname solo que tiene concatenado el nombre del archivo desde donde utilizamos la variable.
 
-
+Código de ejemplo [aquí](https://github.com/sebastiantorres86/node/tree/master/ejemplos/02-globals)
