@@ -35,4 +35,4 @@ console.log('¡Hola Mundo desde Node.js!)
 
 Abrimos una terminal de línea de comandos como cmd o Windows PowerShell si usamos Windows, nos movemos de directorio hasta la carpeta donde guardamos el archivos y ejecutamos: node index.js. Vas a ver en la consola impreso el mensaje del console.log().
 
-El código de ejemplo se enecuentra [aquí]()
+El código de ejemplo se enecuentra [aquí](https://github.com/sebastiantorres86/node/tree/master/ejemplos/01-helloWorld)
