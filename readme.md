@@ -145,6 +145,8 @@ console.log(process.env)
 }
 ```
 
+Código de ejemplo [aquí](https://github.com/sebastiantorres86/node/tree/master/ejemplos/03-env)
+
 Las variables de entorno se utilizan para definir parámetros básicos en la configuración de los programas, y que estos se ejecuten en diferentes ambientes sin tener que editar el código fuente del script. Su uso es habitual porque los programas se pueden ejecutar en diferentes ordenadores.
 
 Entre los valores más habituales que pueden cambiar entre diferentes entornos, puede ser por ejemplo:
@@ -189,4 +191,4 @@ console.log(process.argv);
   'arg3=val3'
 ]
 ```
-Código de ejemplo [aquí]()
+Código de ejemplo [aquí]()https://github.com/sebastiantorres86/node/tree/master/ejemplos/04-process.argv
