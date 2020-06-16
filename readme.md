@@ -16,14 +16,14 @@ Toda esa información permanece en el servidor, de modo que cuando volvamos a in
 
 En términos simples, se trata de una plataforma de código abierto y libre de JavaScript para la programación del lado del servidor, que nos va a permitir crear aplicaciones rápidamente.
 
-+ Node.js nos permite ejecutar Javascript en distintos ambientes y con esto realizar distintas tareas
-+ Dentro de las tareas que podemos realizar se destacan las siguientes:
-  + Correr un simple script
-  + Correr el build de nuestro frontend: Gracias a varios módulos que hay disponibles podemos utilizar Node.js como entorno para generar los archivos finales que vamos a deployar en nuestro hosting
-  + Correr un servidor web
-  + Conectarnos a motores de bases de datos
-+ En esta parte me voy a enfocar en utilizar Node.js para crear un servidor web y poder crear páginas dinámicas en lugar de estáticas como hice hasta ahora (con HTML y CSS)
-+ Al instalar Node.js también se instala otro programa llamado NPM
+- Node.js nos permite ejecutar Javascript en distintos ambientes y con esto realizar distintas tareas
+- Dentro de las tareas que podemos realizar se destacan las siguientes:
+  - Correr un simple script
+  - Correr el build de nuestro frontend: Gracias a varios módulos que hay disponibles podemos utilizar Node.js como entorno para generar los archivos finales que vamos a deployar en nuestro hosting
+  - Correr un servidor web
+  - Conectarnos a motores de bases de datos
+- En esta parte me voy a enfocar en utilizar Node.js para crear un servidor web y poder crear páginas dinámicas en lugar de estáticas como hice hasta ahora (con HTML y CSS)
+- Al instalar Node.js también se instala otro programa llamado NPM
 
 ### Ejemplo 1
 
@@ -68,9 +68,9 @@ El `.js` es opcional siempre que tenga un archivo con esa extensión. En otras p
 
 A pesar de estar creado siguiendo un estándar, Node.js y JavaScript del navegador se diferencian en lo que se refiere a variables globales. Por ejemplo, en el navegador tenemos un variable/objeto document. Sin embargo, en Node.js, no existe (ya que no tratamos con el DOM del navegador), pero si vamos a tener a disposición otras globales / palabras claves:
 
-+ process
-+ global
-+ module.exports and exports
+- process
+- global
+- module.exports and exports
 
 Vamos a ver las principales diferencias entre Node.js y JavaScript.
 
@@ -84,21 +84,109 @@ Cualquier propiedad del primer nivel dentro del objeto `global`, es accesible si
 
 Estas son las principales propiedades del objeto global y se conocen como globals:
 
-+ process
-+ require()
-+ module and module.exports
-+ console and console.log()`
-+ setTimeout() and setInterval()
-+ __dirname and __filename
+- process
+- require()
+- module and module.exports
+- console and console.log()`
+- setTimeout() and setInterval()
+- **dirname and **filename
 
 `console.log()` y `setTimeout()` funcionan similar a los métodos del navegador. Ahora nos vamos a centrar en ver `process`, `require()` y `module.exports`.
 
-### __dirname, __filename y process.cwd
+### **dirname, **filename y process.cwd
 
 `__dirname` es un path absoluto al archivo desde donde estamos utilizando alguna variable global.
 
 `process.cwd` es el path absoluto desde donde ejecutamos nuestra aplicación de Node.
 
-`__filename` es similar a __dirname solo que tiene concatenado el nombre del archivo desde donde utilizamos la variable.
+`__filename` es similar a \_\_dirname solo que tiene concatenado el nombre del archivo desde donde utilizamos la variable.
 
 Código de ejemplo [aquí](https://github.com/sebastiantorres86/node/tree/master/ejemplos/02-globals)
+
+### Node.js process
+
+Cada archivo de Node.js que ejecutamos es un **proceso**.
+
+Podemos acceder a información importante sobre este proceso utilizando el objeto global `process`. Por ejemplo, en la consola podemos ejecutar `node -e "console.log(process.pid)"` y veríamos algo como `95716`.
+
+Otra información importante sobre este proceso es:
+
+- env: Variables de entorno
+- argv: argumentos de la línea de comando
+- exit(): método para terminar el proceso
+
+Veamos cada una por separado.
+
+**env: Variables de entorno**
+
+Las variables de entorno son accesibles mediante el atributo `env`:
+
+```
+console.log(process.env)
+
+{
+  ALLUSERSPROFILE: 'C:\\ProgramData',
+  APPDATA: 'C:\\Users\\sebas\\AppData\\Roaming',
+  ChocolateyInstall: 'C:\\ProgramData\\chocolatey',
+  ChocolateyLastPathUpdate: '132270615779150895',
+  CommonProgramFiles: 'C:\\Program Files\\Common Files',
+  'CommonProgramFiles(x86)': 'C:\\Program Files (x86)\\Common Files',
+  CommonProgramW6432: 'C:\\Program Files\\Common Files',
+  COMPUTERNAME: 'LAPTOP-QCS94STS',
+  ComSpec: 'C:\\WINDOWS\\system32\\cmd.exe',
+  configsetroot: 'C:\\WINDOWS\\ConfigSetRoot',
+  DriverData: 'C:\\Windows\\System32\\Drivers\\DriverData',
+  HOMEDRIVE: 'C:',
+  HOMEPATH: '\\Users\\sebas',
+  LOCALAPPDATA: 'C:\\Users\\sebas\\AppData\\Local',
+  LOGONSERVER: '\\\\LAPTOP-QCS94STS',
+  NUMBER_OF_PROCESSORS: '4',
+  ...
+}
+```
+
+Las variables de entorno se utilizan para definir parámetros básicos en la configuración de los programas, y que estos se ejecuten en diferentes ambientes sin tener que editar el código fuente del script. Su uso es habitual porque los programas se pueden ejecutar en diferentes ordenadores.
+
+Entre los valores más habituales que pueden cambiar entre diferentes entornos, puede ser por ejemplo:
+
+- usuario y contraseña para enviar emails
+- claves para acceders a APIs
+- etc.
+
+Estos valores tenemos que definirlos al ejecutar el programa.
+
+Una forma breve de configurar variables de entorno en la terminal/consola, y después ejecutar un script de Node es, por ejemplo, la siguiente:
+
+```
+NODE_ENV=development node e- "console.log-(process.env.NODE_ENV)
+```
+
+`NODE_ENV` es una convención. Algunos valores comunes son:
+
+- development
+- production
+
+**Argumentos de la línea de comandos**
+
+Para acceder a los argumentos que escribimos en la consola al momento de ejecutar nuestro programa de Node, podemos utilizar la propiedad `process.argv`, que es un array.
+
+Por ejemplo, si el comando es
+
+```
+node app.js arg1 arg2 arg3=val3
+```
+
+Los primeros dos argumentos van a ser `node` y el nombre de la aplicación, mientras que el resto de los elementos del array son los argumentos que escribimos. Por ejemplo:
+
+```
+console.log(process.argv);
+
+[
+  'node',
+  'app.js',
+  'arg1',
+  'arg2',
+  'arg3=val3'
+]
+```
+Código de ejemplo [aquí]()
