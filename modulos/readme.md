@@ -72,4 +72,4 @@ console.log(precio)
 ```
 module.exports = calcularPrecio
 ```
-Código de ejemplo [aquí]()
+Código de ejemplo [aquí](https://github.com/sebastiantorres86/node/tree/master/modulos/ejemplos)
