@@ -36,3 +36,69 @@ console.log('¡Hola Mundo desde Node.js!)
 Abrimos una terminal de línea de comandos como cmd o Windows PowerShell si usamos Windows, nos movemos de directorio hasta la carpeta donde guardamos el archivos y ejecutamos: node index.js. Vas a ver en la consola impreso el mensaje del console.log().
 
 El código de ejemplo se enecuentra [aquí](https://github.com/sebastiantorres86/node/tree/master/ejemplos/01-helloWorld)
+
+## Ejecutar Scripts de Node.js
+
+**Node** es un lenguaje y entorno interpretado, no compilado. Hay tres formas principales de ejecutar código de node:
+
+1. REPL
+2. Opción eval
+3. Lanzar código de node desde un archivo
+
+### Ejecutar código Node desde un archivo
+
+Este es el caso de uso más común porque nos permite guardar programas largos de Node, y ejecutarlos. Para ejecutar un script de Node.js desde un archivo, simplemente escriba `node [NOMBRE_ARCHIVO]`.
+
+Por ejemplo, para correr el código de un archivo `app.js`, que se encuentra en la carpeta actual, simplemente tenemos que ejecutar:
+
+```
+node app.js
+```
+
+El archivo tiene que estar en la misma carpeta. Si necesitamos ejecutar código desde un archivo que está en una carpeta diferente, necesitamos agregar la ruta relativa o absoluta:
+
+```
+node ./app/server.js
+node /var/www/app/server.js
+```
+
+El `.js` es opcional siempre que tenga un archivo con esa extensión. En otras palabras, si tenemos el archivo `server.js` puede ejecutar `node server`.
+
+## Node.js Globals
+
+A pesar de estar creado siguiendo un estándar, Node.js y JavaScript del navegador se diferencian en lo que se refiere a variables globales. Por ejemplo, en el navegador tenemos un variable/objeto document. Sin embargo, en Node.js, no existe (ya que no tratamos con el DOM del navegador), pero si vamos a tener a disposición otras globales / palabras claves:
+
++ process
++ global
++ module.exports and exports
+
+Vamos a ver las principales diferencias entre Node.js y JavaScript.
+
+### global
+
+Tenemos una variable llamada `global`, que es accesible desde cualquier programa o archivo de Node. Esta se refiere al objeto global, y tiene diferentes propiedades como: `global.process` o `global.require` o `global.console`.
+
+Cualquier propiedad del primer nivel dentro del objeto `global`, es accesible sin agregar el prefijo `global`. Por ejemplo, `global.process` es igual a `process`.
+
+### Principales propiedades globales
+
+Estas son las principales propiedades del objeto global y se conocen como globals:
+
++ process
++ require()
++ module and module.exports
++ console and console.log()`
++ setTimeout() and setInterval()
++ __dirname and __filename
+
+`console.log()` y `setTimeout()` funcionan similar a los métodos del navegador. Ahora nos vamos a centrar en ver `process`, `require()` y `module.exports`.
+
+### __dirname, __filename y process.cwd
+
+`__dirname` es un path absoluto al archivo desde donde estamos utilizando alguna variable global.
+
+`process.cwd` es el path absoluto desde donde ejecutamos nuestra aplicación de Node.
+
+`__filename` es similar a __dirname solo que tiene concatenado el nombre del archivo desde donde utilizamos la variable.
+
+
