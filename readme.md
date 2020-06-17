@@ -291,9 +291,9 @@ Para cortar/matar al proceso servidor, tenemos que apretar `CTRL + C` en la term
 
 La función de callback que pasamos como parámetro al ejecutar `createServer`, se va a ejecutar cada vez que nos llegue un pedido a este servidor.
 
-El código de ejemplo se encuentra [aquí](). Para ejecutar, hay que abrir una terminal en esa carpeta y ejecutar npm start
+El código de ejemplo se encuentra [aquí](https://github.com/sebastiantorres86/node/tree/master/server). Para ejecutar, hay que abrir una terminal en esa carpeta y ejecutar `npm start`
 
 Para más información del módulo http:
 
-https://nodejs.org/api/http.html
-https://nodejs.org/api/http.html#http_class_http_server
+- https://nodejs.org/api/http.html
+- https://nodejs.org/api/http.html#http_class_http_server
