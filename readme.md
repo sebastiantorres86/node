@@ -427,4 +427,4 @@ app.delete('/productos/:id', function(req, res) {
 
 ![](https://github.com/nisnardi/comunidad-it-js/raw/master/assets/node/postman2.png)
 
-- El código de ejemplo se encuantra [aquí]()
+- El código de ejemplo se encuantra [aquí](https://github.com/sebastiantorres86/node/tree/master/ejemplos/05-expressAPI)
