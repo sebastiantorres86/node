@@ -297,3 +297,134 @@ Para más información del módulo http:
 
 - https://nodejs.org/api/http.html
 - https://nodejs.org/api/http.html#http_class_http_server
+
+## Express
+
+- Express es un framework web que nos permite hacer las siguientes tareas:
+  - Nos permite manejar cualquier tipo de pedido HTTP (hasta ahora solo usamos GET)
+  - Podemos crear rutas específicas
+  - Integrar motores de render para crear vistas dinámicas (html creado con datos)
+  - Crear `middleware` para procesar los pedidos a nuestro gusto **(feature más importante)**
+  - Mucho más
+- Express es un framework minimalista por lo cual nos da la base para poder tener un server y vamos a utilizar otros módulos para casos específicos como manejar una session, cookies y hasta manejar los datos que nos lleguen por POST
+- Algunos [módulos son mantenidos por el equipo de Express](http://expressjs.com/en/resources/middleware.html)
+- Express nos da la oportunidad de configurar todo a nuestro modo y eso nos da mucha flexibilidad a la hora de crear un proyecto
+- Si bien esto es un beneficio también tenemos que aprender que módulos queremos usar y cómo vamos a crear la arquitectura del servidor
+- No existe una receta única para resolver un problema con Express
+
+## Crear un servidor
+
+- En general un servidor web es una aplicación que escucha en un puerto por pedidos HTTP
+- Al recibir un pedido tiene configurado que tiene que hacer para generar una respuesta
+- Estos request pueden tener datos como pueden ser el id de un producto, un criterio de busqueda o el username y password de un usuario
+- Con estos datos el servidor puede interactuar con una base de datos o no según el caso
+- Si el servidor tiene que mandar un response con un documento HTML lo puede hacer de manera estática (como venimos haciendo hasta ahora)
+- También puede leer datos de una base de datos, crear un documento HTML de forma dinámica (utilizando los datos) y mandar ese documento como respuesta al cliente
+- Para crear los documentos HTML dinámico se pueden utilizar motores de template
+- Express nos permite manejar las rutas para cada request y configurar como tiene que ser la respuesta
+  - Configurar donde estan los archivos
+  - Qué template se tiene que usar en cada oportunidad
+  - Qué motor de template vamos a utilizar
+  - Dónde van a estar guardados los archivos estáticos que queremos utilizar
+- Para el resto de las tareas vamos a agregar módulos específicos
+
+**Ejemplo:**
+
+```
+const express = require('express')
+const app = express()
+
+app.get('/', function(req, res) {
+  response.send('Hola mundo desde un servidor con Express!')
+})
+
+app.listen(3000, function() {
+  console.log('Example app listening on port 3000!')
+})
+```
+
+- En este ejemplo vemos como crear un server con Express
+- Importamos el módulo Express que nos exporta una función y la asignamos a una variable
+- Por medio de la función express() creamos una nueva instancia de nuestro servidor
+- Con el método `get` configuramos una ruta en la raíz de nuestro sitio `/`
+- Utilizamos el método listen para configurar el puerto donde queremos levantar el server y un callback que se ejecuta al terminar de levantar el servidro
+- Al correr este script podemos ver nuestro sitio en `localhost:3000`
+
+## Crear rutas - GET
+
+- Con Express podemos crear rutas de forma muy fácil
+- Utilizamos el método `get` para obtener requests por `HTTP GET`
+- Este método recibe un string como primer parámetro especificando la ruta que queremos manejar (Ejemplo la raíz de nuestro sitio '/')
+- Como segundo parámetro le pasamos un callback con la función que tiene que ejecutar cuando se llame a la ruta configurada
+- Este callback recibe los objetos `req` y `res` como parámetro
+- El objeto `res` tiene un método `send` para enviar una respuesta
+
+**Ejemplo:**
+
+```
+app.get('/', function(req, res) {
+  res.send('Hello World!')
+})
+```
+
+El objeto de Express tiene múltiples métodos para manejar `requests` para todos los verbos de HTTP
+
+**Ejemplo:**
+
+```
+app.post('/', function(req, res) {
+  res.send('Utilizamos el método post para manejar un request por HTTP POST')
+})
+
+app.put('/', function(req, res) {
+  res.send('Utilizamos el método put para manejar un request por HTTP PUT')
+})
+
+app.delete('/', function(req, res) {
+  res.send('Utilizamos el método delete para manejar un request por HTTP DELETE')
+})
+```
+
+- De esta forma podemos crear las rutas que necesitamos para nuestro proyecto
+
+**Ejemplo:**
+
+```
+app.get('/productos', function(req, res) {
+  res.send('Mostramos una lista de productos')
+})
+
+app.post('/productos', function(req, res) {
+  res.send('Creamos un Producto')
+})
+
+app.put('/productos/:id', function(req, res) {
+  res.send('Actualizamos un producto')
+})
+
+app.delete('/productos/:id', function(req, res) {
+  res.send('Borramos un producto')
+})
+```
+
+- Utilizando el browser sólo podemos hace llamados por GET
+
+- Existe una herramienta llamada [Postman](https://www.getpostman.com/) que nos permite hacer cualquier tipo de llamado y ver la respuesta
+
+- Configuramos la url que queremos utilizar
+
+- Usamos el botón de send para hacer un `request`
+
+- Vemos la respuesta en la parte inferior
+
+![](https://raw.githubusercontent.com/nisnardi/comunidad-it-js/master/assets/node/postman1.png)
+
+- Postman también nos da información sobre el status de nuestro `request` (ejemplo: 200)
+
+- Podemos ver los encabezados enviados y recibidos
+
+- También podemos realizar distintos tipos de llamados como pueden ser POST, PUT, DELETE, etc
+
+![](https://github.com/nisnardi/comunidad-it-js/raw/master/assets/node/postman2.png)
+
+- El código de ejemplo se encuantra [aquí]()
