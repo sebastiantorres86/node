@@ -191,8 +191,109 @@ console.log(process.argv);
   'arg3=val3'
 ]
 ```
+
 Código de ejemplo [aquí]()https://github.com/sebastiantorres86/node/tree/master/ejemplos/04-process.argv
 
-Ir a [modulos](https://github.com/sebastiantorres86/node/tree/master/modulos)
+Ir a [módulos](https://github.com/sebastiantorres86/node/tree/master/modulos)
 
 Ir a [NPM](https://github.com/sebastiantorres86/node/tree/master/npm)
+
+---
+
+## Servidor Web
+
+- Uno de los usos más comunes de Node.js es para correr servidores web.
+- Al crear un servidor web con Node.js vamos a interactuar con los módulos [HTTP/HTTPS](https://nodejs.org/api/http.html)
+
+### Utilizando el módulo HTTP de Node.js podemos crear un servidor web
+
+Si bien Node.js puede ser usado para una gran variedad de tareas, su uso primario es para crear aplicaciones web. Node _prospera_ en redes como resultado de su naturalez asíncrona y los módulos del núcleo (como **http**). Node es excelente para crear servidores web rápidos y eficientes.
+
+Vamos a ver un ejemplo sencillo de un servidor web. En el ejemplo vamos a crear un objeto **server**, definir un manejador de requests (una función con un parámetro `req` y `res`), y enviarle alguna información a quien nos hizo un pedido.
+
+```
+const http = require('http');
+const port = 3000;
+
+// creamos la funcion que maneja los pedidos
+const handle = (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/plain'
+  });
+  res.end('Hola Mundo!');
+};
+
+// creamos el objeto servidor
+const server = http.createServer(handle);
+
+// ponemos el servidor a escuchar pedidos
+server.listen(port, err => {
+  if (err) {
+    return console.log('algo falló al poner al server a la escucha', err)
+  }
+
+  console.log(`el servidor esta a la escucha en el puerto ${port}`)
+});
+```
+
+Vamos a separar el código en pedazo más chicos.
+
+El siguiente código carga el módulo http, con el que vamos a poder crear el servidor:
+
+```
+const http = require('http')
+```
+
+Abajo, estamos definiendo la función que va a manejar los pedidos que nos lleguen, que tiene dos parametros: `res` y `res`.
+
+```
+const handle = (req. res) => {
+  res.writeHead(200, {'Content-Type': 'text/plain'})
+  res.end('Hola Mundo!')
+}
+```
+
+Los parámetros `req` y `res` tienen toda la firmación sobre el pedido y la respuesta HTTP.
+
+Para configurar el tipo de respuesta que le queremos devolver a quien nos hizo un pedido, utilizamos el siguiente código:
+
+```
+res.writeHand(200, {'Content-Type': 'text/plain'})
+```
+
+Para enviar el mensaje **Hola Mundo!**, usamos:
+
+```
+res.end('Hola Mundo!')
+```
+
+El fragmento de código a continuación, crea un servidor con la función de callback que contiene el código para manejar los pedidos (creada anteriormente):
+
+```
+const server = http.createServer(handle)
+```
+
+Para poner el servidor a la escuchar (poder aceptar pedidos), tenemos que hacer:
+
+```
+server.listen(port)
+```
+
+Ahora, en una terminal/consola paradas donde tenemos el archivo `server.js` podemos ejecutar el siguiente comando para iniciar nuestro servidor:
+
+```
+node server.js
+```
+
+Ahora que tenemos nuestro servidor funcionando podemos abrir una pestaña de nuestro navegador, escribir en la barra de direcciones **localhost:3000** y vamos a ver el mensaje Hola mundo!.
+
+Para cortar/matar al proceso servidor, tenemos que apretar `CTRL + C` en la terminal.
+
+La función de callback que pasamos como parámetro al ejecutar `createServer`, se va a ejecutar cada vez que nos llegue un pedido a este servidor.
+
+El código de ejemplo se encuentra [aquí](). Para ejecutar, hay que abrir una terminal en esa carpeta y ejecutar npm start
+
+Para más información del módulo http:
+
+https://nodejs.org/api/http.html
+https://nodejs.org/api/http.html#http_class_http_server
